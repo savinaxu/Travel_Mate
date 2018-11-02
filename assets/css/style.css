@@ -1,0 +1,89 @@
+
+/* homepage */
+.bg-img {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Helvetica Neue"; 
+    background-image: url(../images/amogh-manjunath-775985-unsplash.jpg);
+    background-size: cover;
+    background-position: center center;
+    padding:15px;
+}
+
+#search {
+    padding-bottom: 100px;
+    width: 100%;
+    max-width: 790px;
+}
+
+#search h1 {
+    font-size: 50px;
+    line-height: 61px;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+}
+
+.input-container {
+    width: 70%;
+    height: 48px;
+    background-color: #ffffff;
+    margin: 20px auto;
+    position: relative;
+    border-radius: 10px;
+}
+
+.search-btn {
+    width: 48px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0;
+    background: transparent;
+
+}
+
+.search-btn i {
+    font-size: 24px;
+    color: #888888;
+}
+
+#location {
+    height: 100%;
+    border: 0;
+    background-color: white;
+    display: block;
+    width: 100%;
+    padding: 10px 24px 10px 48px;
+    font-size: 18px;
+    color: #333333;
+    border-radius: 10px;
+}
+
+
+
+
+
+
+
+@media (min-width: 576px) {
+}
+
+/* // Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+
+}
+
+/* // Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+}
+/* 
+// Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+}
