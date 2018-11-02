@@ -11,6 +11,7 @@
 
         // Global Vars
         var namesAndIDs = {};
+        var ids = [];
 
         // This variable is an example. Finished model will have this var empty and filled when user inputs a search
         place = "amsterdam";
@@ -27,15 +28,18 @@
         .then(function(response) {
             // console.log(response);
             var shorten = response.response.groups[0].items;
-            // console.log(shorten);
+            console.log(shorten);
             
             for (i = 0; i < shorten.length; i++) {
                 // console.log(shorten[i].venue.name);
                 // console.log(shorten[i].venue.id);
-                
+
+                ids.push(shorten[i].venue.id);
+
                 namesAndIDs [shorten[i].venue.name] = shorten[i].venue.id;
             }
             console.log(namesAndIDs);
+            console.log(ids);
 
         })
     </script>
