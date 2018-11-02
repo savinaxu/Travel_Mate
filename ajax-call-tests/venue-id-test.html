@@ -10,7 +10,7 @@
     <script>
 
         // Got this variable by running AJAX call on 'place' in previous HTML file
-        venueID = "554cd459498efa1076311e7d?";
+        venueID = "4c0fd1ff7c49b7133eb03606?";
         // Date notaion: YYYYMMDD
         date = "20181031";
         clientId = "2H4GZJKNKX1JDBOYJSXSYC34FACBAEYH2B3F1CWFP1WMYOUQ";
@@ -24,9 +24,9 @@
             method: "GET"
         })
         .then(function(response) {
-            console.log(response);
-            // var shorten = response.response.venues;
-            // console.log(shorten);
+            // console.log(response);
+            var shorten = response.response.venue.listed.groups[0].items;
+            console.log(shorten);
             
         })
     </script>
