@@ -32,7 +32,7 @@ var clientSecret = "3W01MIAU01QTD0L4W3QE3NI4PQYZB1WNHMGQZ4UYGQVWYTJI";
                 method: "GET"
             })
             .then(function(response) {
-                console.log(response);
+                // console.log(response);
                 var shorten1 = response.response.groups[0].items;
                 // console.log(shorten1);
                 // console.log(shorten1[0].venue.location.city);

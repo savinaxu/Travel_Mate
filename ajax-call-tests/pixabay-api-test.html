@@ -1,0 +1,41 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>PixaBay API Test</title>
+</head>
+<body>
+
+    <div id="displayLocation"></div>
+    <br>
+    <br>
+    <div id="displayPic"></div>
+
+    <script>
+
+        var search = "arizona";
+        var API_KEY = '10550959-d75d5c93391ba85fb4ccf5e31';
+        var queryURL = "https://pixabay.com/api/?key="+API_KEY+"&q="+ search + "&per_page=3";
+
+            $.ajax({
+            url: queryURL,
+            method: "GET"
+        })
+        .then(function(response) {
+            console.log(response);
+            var imageURL = response.hits[0].largeImageURL
+            console.log(imageURL);
+            
+
+            $("#displayLocation").text(search);
+            var newPic = $("<img>");
+            newPic.attr("src", imageURL);
+            $("#displayPic").append(newPic);
+        })
+        
+    </script>
+    
+</body>
+</html>    
