@@ -46,17 +46,41 @@ $(function() {
         //insert data
         $(".individual-content-img").attr("src", landmarkImgUrl)
         $(".individual-content-header").text(landmarkName)
-        $(".individual-content-description")
+        $(".individual-content-description").text(landmarkDescription)
 
         //append to html page
-        $(".individual-content").append(individualContentHeader, individualContentDescription)
-        $(".individual-content-container").append(landmarkImg, individualContentContainer)
-        $(".landmarks-content-container").append(landmarkContentContainer, dividing)
+        individualContentContainer.append(individualContentHeader, individualContentDescription)
+        landmarkContentContainer.append(landmarkImg, individualContentContainer)
+        landmarkDiv.append(landmarkContentContainer, dividing)
+
+        //return landmarkDiv
+        return landmarkDiv
     }
 
 //==========================================================================
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+// onlick function
+//==========================================================================
+    $(".search-btn").on("click",function() {
+        event.preventDefault()
+        userInput = $("#location").val()
+        renderUserInputLocation(userInput)
+        
+    })
+//==========================================================================
 
 
 
