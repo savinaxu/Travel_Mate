@@ -21,6 +21,7 @@ var clientSecret = "3W01MIAU01QTD0L4W3QE3NI4PQYZB1WNHMGQZ4UYGQVWYTJI";
         placeIDs = [];
         placeNames = [];
         // placeDescriptions = [];
+        $("#city").val("");
         search = $("#search-input").val();
 
         if (search.length > 0) {
@@ -31,9 +32,11 @@ var clientSecret = "3W01MIAU01QTD0L4W3QE3NI4PQYZB1WNHMGQZ4UYGQVWYTJI";
                 method: "GET"
             })
             .then(function(response) {
-                // console.log(response);
+                console.log(response);
                 var shorten1 = response.response.groups[0].items;
                 // console.log(shorten1);
+                // console.log(shorten1[0].venue.location.city);
+                $("#city").text(shorten1[0].venue.location.city);
                 
                 for (i = 0; i < shorten1.length; i++) {
                     placeIDs.push(shorten1[i].venue.id);
@@ -68,8 +71,8 @@ var clientSecret = "3W01MIAU01QTD0L4W3QE3NI4PQYZB1WNHMGQZ4UYGQVWYTJI";
                 //
 
 
-                console.log(placeNames);
-                console.log(placeIDs);
+                // console.log(placeNames);
+                // console.log(placeIDs);
                 // console.log(placeDescriptions);
 
                 display();
@@ -78,6 +81,7 @@ var clientSecret = "3W01MIAU01QTD0L4W3QE3NI4PQYZB1WNHMGQZ4UYGQVWYTJI";
 
             //Displace Function
                 function display(){
+                    $("#search-input").val("");
                     $("#display").empty();
                     for (i = 0; i < placeNames.length; i++) {
                             // console.log(placeDescriptions);
