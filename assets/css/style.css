@@ -164,12 +164,11 @@ section {
 
  .individual-content-header {
     font-size: 30px;
-    line-height: 17px;
+    line-height: 35px;
     color: #000000;
     font-family: 'PT Sans Narrow', sans-serif;
     font-weight: lighter;
     margin-bottom: 30px;
-    margin-top: 30px;
  }
 
  .individual-content-description {
