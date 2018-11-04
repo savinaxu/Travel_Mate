@@ -72,7 +72,9 @@ body {
 /* ===== homepage ends ===== */
 
 /* ===== result page ===== */
-
+#result {
+    display: none;
+}
 
 /* result header */
 
@@ -163,16 +165,16 @@ section {
  }
 
  .individual-content-header {
-    font-size: 30px;
+    font-size: 20px;
     line-height: 35px;
     color: #000000;
     font-family: 'PT Sans Narrow', sans-serif;
     font-weight: lighter;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
  }
 
  .individual-content-description {
-     font-size: 22px;
+     font-size: 16px;
      font-weight: lighter;
  }
 
