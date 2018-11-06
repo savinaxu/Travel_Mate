@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Travel Mate</title>
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <!-- homepage start -->
+    <div id="home" class="bg-img home">
+        <form id="search">
+            <h1>Find Your Destination</h1>
+            <div class="input-container">
+                <button class="search-btn" type="submit"><i class="fas fa-search"></i></button>
+                <input type="text" name="location" id="location" placeholder="Search...">
+            </div>
+        </form>
+    </div>
+    <!-- homepage ends -->
+
+    <!-- result page start -->
+    <div id="result" class="result result-container">
+        <div class="result-header-bg-img">
+            <a href="#home" class="back">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <div class="result-header-content-container">
+                <h1 class="user-input-location result-header-content">temporary</h1>
+            </div>
+        </div>
+
+        <div class="result-main-content-container">
+
+            <!-- landmarks -->
+            <section class="landmarks">
+                <div class="section-header-container">
+                    <h1 class="section-header-title">Top landmarks in <span class="user-input-location"></span></h1>
+                    <div class="section-header-dividing-line"></div>
+                </div>
+
+                <div class="landmarks-content-container">
+                    
+                </div>
+            </section>
+
+            <section class="photographs">
+                <div class="section-header-container">
+                    <h1 class="section-header-title">Photographs of <span class="user-input-location"></span></h1>
+                    <div class="section-header-dividing-line"></div>
+                </div>
+
+                <div class="photographs-content-container">
+                    <div class="photographs-individual-content-container">
+                    </div>
+                    <div class="individual-content-dividing-line"></div>
+                </div>
+            </section>
+
+            <section class="weather">
+                <div class="section-header-container">
+                    <h1 class="section-header-title">Weather in <span class="user-input-location"></span></h1>
+                    <div class="section-header-dividing-line"></div>
+                </div>
+
+                <!-- <div class="weather-content-container">
+                    <div class="weather-individual-content-container">
+                        <div class="weather-individual-text-container">
+                            <div class="individual-text">
+                                <p class="individual-text-date">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                                <h1 class="individual-text-data">the bund</h1>
+                            </div>
+                            <img src="assets/images/yiran-ding-1101233-unsplash.jpg" class="weather-content-img">
+                        </div>
+                        <div class="individual-content-dividing-line"></div>
+                    </div>
+                </div> -->
+            </section>
+        </div>
+    </div>
+    <!-- result page ends -->
+
+    <script src="assets/js/script.js"></script>
+</body>
+
+</html>
