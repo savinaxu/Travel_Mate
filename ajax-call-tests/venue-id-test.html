@@ -8,15 +8,16 @@
 </head>
 <body>
     <script>
+        var array = [];
 
         // Got this variable by running AJAX call on 'place' in previous HTML file
-        venueID = "4c0fd1ff7c49b7133eb03606?";
+        var venueID = "4b0850dff964a520da0823e3?";
         // Date notaion: YYYYMMDD
-        date = "20181031";
-        clientId = "2H4GZJKNKX1JDBOYJSXSYC34FACBAEYH2B3F1CWFP1WMYOUQ";
-        clientSecret = "3W01MIAU01QTD0L4W3QE3NI4PQYZB1WNHMGQZ4UYGQVWYTJI";
+        var date = "20181031";
+        var clientId = "2H4GZJKNKX1JDBOYJSXSYC34FACBAEYH2B3F1CWFP1WMYOUQ";
+        var clientSecret = "3W01MIAU01QTD0L4W3QE3NI4PQYZB1WNHMGQZ4UYGQVWYTJI";
 
-        quearyURL2 = "https://api.foursquare.com/v2/venues/" + venueID + "&client_id=" + clientId + "&client_secret=" + clientSecret + "&v=" + date;
+        var quearyURL2 = "https://api.foursquare.com/v2/venues/" + venueID + "&client_id=" + clientId + "&client_secret=" + clientSecret + "&v=" + date;
 
 
         $.ajax({
@@ -25,8 +26,9 @@
         })
         .then(function(response) {
             console.log(response);
-            var shorten = response.response.venue.listed.groups[0].items;
-            console.log(shorten);
+            var shorten = response.response.venue.listed.groups[0].items[0].description;
+            array.push(shorten);
+            console.log(array);
             
         })
     </script>
