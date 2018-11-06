@@ -42,6 +42,7 @@ $(function() {
         var individualContentDescription = $("<p class='individual-content-description'>")
         var individualContentType = $("<span class='type'>")
         var individualContentAddress = $("<span class='address'>")
+        var individualContentComments = $("<span class='comments'>")
         var individualContentBr = $("<br>")
 
         //dividing div
@@ -52,9 +53,10 @@ $(function() {
         individualContentHeader.text(landmarkName)
         individualContentType.text("Type: " + type)
         individualContentAddress.text("Address: " + address)
+        individualContentComments.text("Description :" + landmarkName)
 
         //append to html page
-        individualContentDescription.append(individualContentType, individualContentBr,individualContentAddress)
+        individualContentDescription.append(individualContentType, individualContentBr,individualContentAddress, individualContentBr, individualContentComments)
         individualContentContainer.append(individualContentHeader, individualContentDescription)
         landmarkContentContainer.append(landmarkImg, individualContentContainer)
         landmarkDiv.append(landmarkContentContainer, dividing)

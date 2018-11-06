@@ -1,7 +1,7 @@
 $(function() {
 
 
-var search = "Chicago";
+var search;
 var API_KEY = '10550959-d75d5c93391ba85fb4ccf5e31';
 var queryURL = "https://pixabay.com/api/?key="+API_KEY+"&q="+ search + "&per_page=3";
 
