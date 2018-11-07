@@ -30,7 +30,7 @@ $(function() {
 // ***render result page landmarks*** //
 //--------------------------------------
     //create dynamic div for landmakrs
-    function renderLandmarks(landmarkImgUrl, landmarkName, type, address, crossStreet) {
+    function renderLandmarks(landmarkImgUrl, landmarkName, type, address, landmarkDescription) {
         //wrap div
         var landmarkDiv = $("<div class='landmarks-individual-content-container'>")
 
@@ -43,7 +43,8 @@ $(function() {
         var individualContentType = $("<span class='type'>")
         var individualContentAddress = $("<span class='address'>")
         var individualContentComments = $("<span class='comments'>")
-        var individualContentBr = $("<br>")
+        var individualContentBr1 = $("<br>")
+        var individualContentBr2 = $("<br>")
 
         //dividing div
         var dividing = $("<div class='individual-content-dividing-line'>")
@@ -53,10 +54,10 @@ $(function() {
         individualContentHeader.text(landmarkName)
         individualContentType.text("Type: " + type)
         individualContentAddress.text("Address: " + address)
-        individualContentComments.text("Description :" + landmarkName)
+        individualContentComments.text("Description :" + landmarkDescription)
 
         //append to html page
-        individualContentDescription.append(individualContentType, individualContentBr,individualContentAddress, individualContentBr, individualContentComments)
+        individualContentDescription.append(individualContentType, individualContentBr1,individualContentAddress, individualContentBr2, individualContentComments)
         individualContentContainer.append(individualContentHeader, individualContentDescription)
         landmarkContentContainer.append(landmarkImg, individualContentContainer)
         landmarkDiv.append(landmarkContentContainer, dividing)
@@ -69,7 +70,7 @@ $(function() {
     function showLandmarks() {
         $(".landmarks-content-container").empty()
         for (var i = 0; i < landmarkArr.length; i++) {
-            var landDiv = renderLandmarks(landmarkArr[i].image, landmarkArr[i].name, landmarkArr[i].type, landmarkArr[i].address, landmarkArr[i].crossStreet)
+            var landDiv = renderLandmarks(landmarkArr[i].image, landmarkArr[i].name, landmarkArr[i].type, landmarkArr[i].address, landmarkArr[i].description)
             $(".landmarks-content-container").append(landDiv)
         }
     }
@@ -96,7 +97,7 @@ $(function() {
                 id: landmarkIId,
                 name: landmarkIName,
                 type: landmarkIType,
-                address: landmarkIAddress,
+                address: landmarkIAddress, 
             }
 
             landmarkArr.push(landmark)
@@ -106,6 +107,7 @@ $(function() {
     function pushLandmarksImg(landmarkArr, id, secret) {
         for (var i = 0; i < landmarkArr.length; i++) {
             ajaxTravel2(landmarkArr[i].id, id, secret, landmarkArr[i])
+            ajaxTravel3(landmarkArr[i].id, id, secret, landmarkArr[i])
         }
     }
 
@@ -144,36 +146,38 @@ $(function() {
             showLandmarks()
         })
     }
+//---------------------------
+// ***travel third api*** //
+//---------------------------
+    function ajaxTravel3 (locationId, id, secret, comment) {
+        var quearyURL = "https://api.foursquare.com/v2/venues/" + locationId + "?&client_id=" + id + "&client_secret=" + secret + "&v=20181031";
+            $.ajax({
+                url: quearyURL,
+                method: "GET"
+            }).then(function(response) {
+                var description = response.response.venue.listed.groups[0].items[0].description;
+                comment.description = description
+                showLandmarks()
+            })
+    }
 //------------------
 // ***img api*** //
 //------------------
-function pixabay(){
-    place = userInput;
-
-
+function pixabay(place) {
     var API_KEY = '10550959-d75d5c93391ba85fb4ccf5e31';
-    var queryURL = "https://pixabay.com/api/?key="+API_KEY+"&q="+ place + "&per_page=4";
+    var queryURL = "https://pixabay.com/api/?key="+ API_KEY + "&q=" + place + "&per_page=4";
 
     $.ajax({
         url: queryURL,
         method: "GET"
-    })
-    .then(function(response) {
-        // console.log(response);
-        // console.log(largeImageURL = response.hits);
-        
-        for (var i = 0; i <= place.length ; i++){
-            var newPic = $("<img>").attr("src",response.hits[i].largeImageURL);
+    }).then(function(response) {
+        for (var i = 0; i <= 4 ; i++){
+            var newPic = $("<img>")
+            newPic.attr("src",response.hits[i].largeImageURL);
             $(".photographs-individual-content-container").append(newPic);
         }
     })
 }
-    
-
-
-
-
-
 //==========================================================================
 // onlick function
 //==========================================================================
@@ -186,14 +190,20 @@ function pixabay(){
         $("#result").show()
         event.preventDefault()
         userInput = $("#location").val()
+        pixabay(userInput)
         renderUserInputLocation(userInput)
         ajaxTravel1(userInput, travelClientId, travelClientSecret, travelDate)
-        pixabay();
+        
+
     })
 //--------------------------
 // ***back button*** //
 //--------------------------
     $(".back").on("click", function() {
+        $(".landmarks-content-container").empty()
+        $(".photographs-individual-content-container").empty()
+        $(".weather-content-container").empty()
+        landmarkArr = [];
         $("#location").val("")
         $("#result").hide()
         $("#home").show()

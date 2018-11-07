@@ -7,7 +7,10 @@
     <title>PixaBay API Test</title>
 </head>
 <body>
-
+    <div class="input-container">
+        <button class="search-btn" type="submit"><i class="fas fa-search"></i>Search</button>
+        <input type="text" name="location" id="location" placeholder="Search...">
+    </div>
     <div id="displayLocation"></div>
     <br>
     <br>
@@ -15,9 +18,15 @@
 
     <script>
 
-        var search = "arizona";
-        var API_KEY = '10550959-d75d5c93391ba85fb4ccf5e31';
-        var queryURL = "https://pixabay.com/api/?key="+API_KEY+"&q="+ search + "&per_page=3";
+        var search;
+        // var API_KEY = '10550959-d75d5c93391ba85fb4ccf5e31';
+        // var queryURL = "https://pixabay.com/api/?key="+API_KEY+"&q="+ search + "&per_page=4";
+        var imageURL;
+
+        $(".search-btn").on("click", function(){
+            var API_KEY = '10550959-d75d5c93391ba85fb4ccf5e31';
+            var queryURL = "https://pixabay.com/api/?key="+ API_KEY + "&q=" + search + "&per_page=4";
+            search = $("#location").val()
 
             $.ajax({
             url: queryURL,
@@ -25,16 +34,21 @@
         })
         .then(function(response) {
             console.log(response);
-            var imageURL = response.hits[0].largeImageURL
+            imageURL = response.hits[0].largeImageURL
             console.log(imageURL);
-            
-
-            $("#displayLocation").text(search);
-            var newPic = $("<img>");
-            newPic.attr("src", imageURL);
-            $("#displayPic").append(newPic);
+            display()
         })
-        
+        })
+
+          // Display
+          function display() {
+              for (i = 0; i <=4; i++) {
+                $("#displayLocation").text(search);
+                var newPic = $("<img>");
+                newPic.attr("src", imageURL);
+                $("#displayPic").append(newPic);
+              }
+          }
     </script>
     
 </body>
