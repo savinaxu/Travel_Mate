@@ -155,8 +155,14 @@ $(function() {
                 method: "GET"
             }).then(function(response) {
                 var description = response.response.venue.listed.groups[0].items[0].description;
-                comment.description = description
-                showLandmarks()
+                if (description.length > 0) {
+                    comment.description = description
+                    showLandmarks()
+                }
+                else {
+                    description = "A very cool place!"
+                }
+                
             })
     }
 //------------------
