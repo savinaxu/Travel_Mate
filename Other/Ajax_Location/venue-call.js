@@ -42,9 +42,11 @@ var clientSecret = "3W01MIAU01QTD0L4W3QE3NI4PQYZB1WNHMGQZ4UYGQVWYTJI";
                 for (i = 0; i < shorten1.length; i++) {
                     placeIDs.push(shorten1[i].venue.id);
                     placeNames.push(shorten1[i].venue.name);
-                    if(placeIDs.length === 5) {
-                        ajax2();
-                    }
+                    display();
+                    console.log(shorten1);
+                    // if(placeIDs.length === 5) {
+                    //     ajax2();
+                    // }
                 }
             })
 
@@ -91,7 +93,7 @@ var clientSecret = "3W01MIAU01QTD0L4W3QE3NI4PQYZB1WNHMGQZ4UYGQVWYTJI";
                 // console.log(placeDescriptions[i]);
                 var addDisplay = $("#display");
                 addDisplay.append("<li id='place" + [i] + "'>" + placeNames[i] + "</li>");
-                addDisplay.append("<li id='description" + [i] + "'>Description: " + placeDescriptions[i] + "</li>");
+                // addDisplay.append("<li id='description" + [i] + "'>Description: " + placeDescriptions[i] + "</li>");
                 addDisplay.append("<br>");
         }
 }
