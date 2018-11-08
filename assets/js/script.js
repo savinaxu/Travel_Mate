@@ -53,7 +53,12 @@ $(function() {
         individualContentHeader.text(landmarkName)
         individualContentType.text("Type: " + type)
         individualContentAddress.text("Address: " + address)
-        individualContentComments.text("Description :" + landmarkDescription)
+        if (landmarkDescription.length > 0) {
+            individualContentComments.text("Description: " + landmarkDescription)
+        }
+        else {
+            individualContentComments.text("Description: A very cool place!")
+        }
 
         //append to html page
         individualContentDescription.append(individualContentType, individualContentBr1,individualContentAddress, individualContentBr2, individualContentComments)
@@ -155,14 +160,8 @@ $(function() {
                 method: "GET"
             }).then(function(response) {
                 var description = response.response.venue.listed.groups[0].items[0].description;
-                if (description.length > 0) {
-                    comment.description = description
-                    showLandmarks()
-                }
-                else {
-                    description = "A very cool place!"
-                }
-                
+                comment.description = description
+                showLandmarks()   
             })
     }
 //------------------
