@@ -1,8 +1,9 @@
 $(function() {
 
-    //==========================================================================
-    //global variable
-    //==========================================================================
+
+//==========================================================================
+//global variable
+//==========================================================================
         var userInput
         //travelAPI
         var travelDate = "20181031";
@@ -12,9 +13,13 @@ $(function() {
         var landmarkArr = [];
         //imgAPI
         var imgAPI = '10550959-d75d5c93391ba85fb4ccf5e31';
-    //==========================================================================
-    //render functions
-    //==========================================================================
+        //weatherAPI
+        var weatherAPI = '9155792ab652e78bd52c926cce6a999c';
+
+
+//==========================================================================
+//render functions
+//==========================================================================
     //-----------------------------------
     // ***render result page header*** //
     //-----------------------------------
@@ -74,18 +79,53 @@ $(function() {
                 $(".landmarks-content-container").append(landDiv)
             }
         }
-    //----------------------------------------
-    // ***render result page photographs*** //
-    //----------------------------------------
+    //------------------------------------
+    // ***render result page weather*** //
+    //------------------------------------
+        function randerImg(photoUrl, holder) {
+            var newPic = $("<img>")
+            newPic.attr("src",photoUrl);
+            holder.append(newPic);
+        }
+    //------------------------------------
+    // ***render result page weather*** //
+    //------------------------------------
+        //create dynamic div for weather
+        function randerWeather(weatherImgUrl, weatherDate, weatherData){
+            //wrap div
+            var weatherDiv = $("<div class='weather-individual-content-container'>")
+
+            //content div
+            var weatherTextContainer = $("<div class='weather-individual-text-container'>")
+            var weatherIndividualText = $("<div class='individual-text'>")
+            var individualTextDate = $("<p class='individual-text-date'>")
+            var individualTextData = $("<h1 class='individual-text-data'>")
+            var weatherImg = $("<img class='weather-content-img'>")
+
+            //dividing div
+            var dividing = $("<div class='individual-content-dividing-line'>")
+
+            //insert data
+            weatherImg.attr("src", weatherImgUrl)
+            individualTextDate.text(weatherDate)
+            individualTextData.text(weatherData)
     
+            //append to html page
+            weatherIndividualText.append(individualTextDate, individualTextData)
+            weatherTextContainer.append(weatherIndividualText, weatherImg)
+            weatherDiv.append(weatherTextContainer, dividing)
     
-    
-    //==========================================================================
-    //iterate variables function
-    //==========================================================================
-    //---------------------
+            //show on the page
+            $(".weather-content-container").append(weatherDiv)
+        }
+
+
+//==========================================================================
+//iterate variables function
+//==========================================================================
+    //--------------------------
     // ***push travel data*** //
-    //---------------------
+    //--------------------------
         function pushLandmarksContent(arr) {
             for (var i = 0; i < arr.length; i++) {
                 var landmarkIId = arr[i].venue.id
@@ -111,15 +151,15 @@ $(function() {
             }
         }
     
-    
-    //==========================================================================
-    //ajax apis
-    //==========================================================================
+
+//==========================================================================
+//ajax apis
+//==========================================================================
     //---------------------
     // ***travel api*** //
     //---------------------
         function ajaxTravel1(location, id, secret, time) {
-            var queryURL = "https://api.foursquare.com/v2/venues/explore?near=" + location + "&query=photos&limit=5&client_id=" + id + "&client_secret=" + secret + "&v=" + time;
+            var queryURL = "https://api.foursquare.com/v2/venues/explore?near=" + location + "&query=photos&limit=6&client_id=" + id + "&client_secret=" + secret + "&v=" + time;
             $.ajax({
                 url: queryURL,
                 method: "GET"
@@ -163,53 +203,81 @@ $(function() {
     //------------------
     // ***img api*** //
     //------------------
-    function pixabay(place) {
-        var API_KEY = '10550959-d75d5c93391ba85fb4ccf5e31';
-        var queryURL = "https://pixabay.com/api/?key="+ API_KEY + "&q=" + place + "&per_page=4";
-    
+    function ajaxImg(id, place) {
+        var queryURL = "https://pixabay.com/api/?key="+ id + "&q=" + place + "&per_page=7";
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function(response) {
-            for (var i = 0; i <= 4 ; i++){
-                var newPic = $("<img>")
-                newPic.attr("src",response.hits[i].largeImageURL);
-                $(".photographs-individual-content-container").append(newPic);
+               var bgImgUrl = response.hits[0].largeImageURL
+               renderResultHeader(bgImgUrl)
+               var photoColumn1 = $(".photoColumn1")
+               var photoColumn2 = $(".photoColumn2")
+               photoColumn1.empty()
+               photoColumn2.empty()
+            for (var i = 1; i <= 7 ; i++){
+                var photo = response.hits[i].largeImageURL
+                if (i % 2 !== 0) {
+                    randerImg(photo, photoColumn1)
+                } else {
+                    randerImg(photo, photoColumn2)
+                }
+                
             }
         })
     }
-    //==========================================================================
-    // onlick function
-    //==========================================================================
-    //--------------------------
+    //---------------------
+    // ***weather api*** //
+    //---------------------
+        function ajaxWeather(location, api) {
+            var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + location + "&cnt=17&units=imperial&appid=" + api;
+
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            }).then(function(response) {
+                var weatherList = response.list
+                $(".weather-content-container").empty()
+                for (var i = 0; i < weatherList.length; i +=8) {
+                    var time = weatherList[i].dt_txt
+                    var date = time.substring(0, 10)
+                    var temp = Math.floor(weatherList[i].main.temp)
+                    var prefix = "http://openweathermap.org/img/w/"
+                    var icon = weatherList[i].weather[0].icon
+                    var suffix = ".png"
+                    var iconUrl = prefix + icon + suffix
+
+                    randerWeather(iconUrl, date, temp)
+                }
+            })
+        }
+
+
+//==========================================================================
+// onlick function
+//==========================================================================
+    //------------------------
     // ***search button*** //
-    //--------------------------
+    //------------------------
         $(".search-btn").on("click", function() {
             event.preventDefault()
             $("#home").hide()
             $("#result").show()
             event.preventDefault()
-            userInput = $("#location").val()
-            pixabay(userInput)
+            userInput = $("#location").val().trim().toUpperCase()
+            ajaxImg(imgAPI, userInput)
             renderUserInputLocation(userInput)
             ajaxTravel1(userInput, travelClientId, travelClientSecret, travelDate)
-            
-    
+            ajaxWeather(userInput, weatherAPI)
         })
     //--------------------------
     // ***back button*** //
     //--------------------------
         $(".back").on("click", function() {
-            $(".landmarks-content-container").empty()
-            $(".photographs-individual-content-container").empty()
-            $(".weather-content-container").empty()
             landmarkArr = [];
             $("#location").val("")
             $("#result").hide()
             $("#home").show()
         })
     //==========================================================================
-    
-    
-    
     })
