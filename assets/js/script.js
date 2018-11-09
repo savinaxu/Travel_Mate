@@ -61,13 +61,14 @@ $(function() {
             individualContentHeader.text(landmarkName)
             individualContentType.text("Type: " + type)
             individualContentAddress.text("Address: " + address)
+
             if (landmarkDescription.length > 0) {
                 individualContentComments.text("Comment: " + landmarkDescription)
             }
             else {
                 individualContentComments.text("Comment: A very cool place!")
             }
-    
+
             //append to html page
             individualContentDescription.append(individualContentType, individualContentBr1,individualContentAddress, individualContentBr2, individualContentComments)
             individualContentContainer.append(individualContentHeader, individualContentDescription)
