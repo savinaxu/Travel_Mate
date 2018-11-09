@@ -175,7 +175,7 @@ $(function() {
                     pushLandmarksImg(landmarkArr, travelClientId, travelClientSecret)
                 })
             }
-            
+
         //---------------------------
         // ***travel second api*** //
         //---------------------------
@@ -380,7 +380,6 @@ $(function() {
                         $(this).text(cDegree)
                     })
                 }
-                
                 cClick = 1
                 fClick = 0
             })
