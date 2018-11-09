@@ -361,6 +361,8 @@ $(function() {
                     cClick = 0
                 }  
             })
+
+            
             
         //-------------------------------
         // ***fcelsius to fahrenheit*** //
