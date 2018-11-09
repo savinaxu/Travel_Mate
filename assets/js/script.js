@@ -175,6 +175,7 @@ $(function() {
                     pushLandmarksImg(landmarkArr, travelClientId, travelClientSecret)
                 })
             }
+            
         //---------------------------
         // ***travel second api*** //
         //---------------------------
