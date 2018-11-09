@@ -329,6 +329,34 @@ section {
     height: 140px;
 }
 
+<<<<<<< HEAD
+.convert {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.convert > button {
+    border-radius: 10%;
+    border: 1px solid #ff0066;
+    background-color: white;
+    color: #ff0066;
+    padding: 10px 20px;
+    font-size: 30px;
+}
+
+.convert > button:hover {
+    color: #ffffff;
+    background: #ff0066;
+}
+
+.active {
+    color: #ffffff !important;
+    background: #ff0066 !important;
+}
+
+=======
+>>>>>>> master
 
 
 
