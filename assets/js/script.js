@@ -274,8 +274,8 @@ $(function () {
         if (!re.test(userText)) {
             alert("Please enter a validated city!")
         } else {
-            $("#home").hide()
-            $("#result").show()
+            $("#home").hide("slow")
+            $("#result").show("slow")
             ajaxImg(imgAPI, userText, a, b)
             renderUserInputLocation(userText)
             ajaxTravel1(userInput, travelClientId, travelClientSecret, travelDate)
@@ -333,8 +333,8 @@ $(function () {
         $(".photoColumn2").empty()
         landmarkArr = [];
         $("#location").val("")
-        $("#result").hide()
-        $("#home").show()
+        $("#result").hide("slow")
+        $("#home").show("slow")
         a = 0
         b = 6
     })
