@@ -239,7 +239,7 @@ $(function () {
     // ***weather api*** //
     //---------------------
     function ajaxWeather(location, api) {
-        var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + location + "&cnt=17&units=imperial&appid=" + api;
+        var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + location + "&cnt=17&units=imperial&appid=" + api;
 
         $.ajax({
             url: queryURL,
