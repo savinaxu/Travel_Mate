@@ -166,11 +166,19 @@ body {
 
 .back {
     align-self: flex-start;
+    background: #000000;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    position: relative;
 }
 
 .back i {
     font-size: 24px;
     color: white;
+    position: absolute;
+    top: 25%;
+    left: 25%;
 }
 
 .result-header-content {
@@ -293,6 +301,15 @@ section {
     opacity:1;
 } 
 
+.more-image {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.more-image:hover {
+    cursor: pointer;
+}
+
 /* weather */
 
 .weather-individual-text-container {
@@ -381,6 +398,10 @@ section {
     
     .individual-content-container {
         display: block;
+    }
+
+    .result-header-content {
+        font-size: 100px;
     }
 }
 /* 

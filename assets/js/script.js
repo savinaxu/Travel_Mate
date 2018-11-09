@@ -13,6 +13,8 @@ $(function() {
         var landmarkArr = [];
         //imgAPI
         var imgAPI = '10550959-d75d5c93391ba85fb4ccf5e31';
+        var a = 0;
+        var b = 6
         //weatherAPI
         var weatherAPI = '9155792ab652e78bd52c926cce6a999c';
 
@@ -71,7 +73,7 @@ $(function() {
             return landmarkDiv
         }
     
-        //show landmark result
+        // show landmark result
         function showLandmarks() {
             $(".landmarks-content-container").empty()
             for (var i = 0; i < landmarkArr.length; i++) {
@@ -119,7 +121,6 @@ $(function() {
             $(".weather-content-container").append(weatherDiv)
         }
 
-
 //==========================================================================
 //iterate variables function
 //==========================================================================
@@ -150,7 +151,6 @@ $(function() {
                 ajaxTravel3(landmarkArr[i].id, id, secret, landmarkArr[i])
             }
         }
-    
 
 //==========================================================================
 //ajax apis
@@ -203,8 +203,8 @@ $(function() {
     //------------------
     // ***img api*** //
     //------------------
-    function ajaxImg(id, place) {
-        var queryURL = "https://pixabay.com/api/?key="+ id + "&q=" + place + "&per_page=7";
+    function ajaxImg(id, place, a, b) {
+        var queryURL = "https://pixabay.com/api/?key="+ id + "&q=" + place + "&per_page=25";
         $.ajax({
             url: queryURL,
             method: "GET"
@@ -213,16 +213,17 @@ $(function() {
                renderResultHeader(bgImgUrl)
                var photoColumn1 = $(".photoColumn1")
                var photoColumn2 = $(".photoColumn2")
-               photoColumn1.empty()
-               photoColumn2.empty()
-            for (var i = 1; i <= 7 ; i++){
-                var photo = response.hits[i].largeImageURL
-                if (i % 2 !== 0) {
-                    randerImg(photo, photoColumn1)
-                } else {
-                    randerImg(photo, photoColumn2)
-                }
-                
+               if (a >= 24) {
+                   $(".show-more").text("--- No more photos ---")
+               } else {
+                for (var i = 1+a ; i <= b ; i++){
+                    var photo = response.hits[i].largeImageURL
+                    if (i % 2 !== 0) {
+                        randerImg(photo, photoColumn1)
+                    } else {
+                        randerImg(photo, photoColumn2)
+                    }
+               }
             }
         })
     }
@@ -252,7 +253,27 @@ $(function() {
             })
         }
 
+//==========================================================================
+//validation check function
+//==========================================================================
+    //--------------------------
+    // ***user input check*** //
+    //--------------------------
+    function checkUserInput(userText, imgAPI, a, b) {
+        var re = /^([a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$/
 
+        if (!re.test(userText)) {
+            alert("Please enter a validated city!")
+        } else {
+            $("#home").hide()
+            $("#result").show()
+            ajaxImg(imgAPI, userText, a, b)
+            renderUserInputLocation(userText)
+            ajaxTravel1(userInput, travelClientId, travelClientSecret, travelDate)
+            ajaxWeather(userInput, weatherAPI)
+            $(".show-more").text("--- Show More ---")
+        }
+    }
 //==========================================================================
 // onlick function
 //==========================================================================
@@ -261,23 +282,30 @@ $(function() {
     //------------------------
         $(".search-btn").on("click", function() {
             event.preventDefault()
-            $("#home").hide()
-            $("#result").show()
-            event.preventDefault()
             userInput = $("#location").val().trim().toUpperCase()
-            ajaxImg(imgAPI, userInput)
-            renderUserInputLocation(userInput)
-            ajaxTravel1(userInput, travelClientId, travelClientSecret, travelDate)
-            ajaxWeather(userInput, weatherAPI)
+            checkUserInput(userInput, imgAPI, a, b)
         })
     //--------------------------
     // ***back button*** //
     //--------------------------
         $(".back").on("click", function() {
+            $(".photoColumn1").empty()
+            $(".photoColumn2").empty()
             landmarkArr = [];
             $("#location").val("")
             $("#result").hide()
             $("#home").show()
+            a = 0
+            b = 6
         })
+    //--------------------------
+    // ***show more*** //
+    //--------------------------
+        $(".show-more").on("click", function() {
+            a += 6
+            b += 6
+            ajaxImg(imgAPI, userInput, a, b) 
+        })
+
     //==========================================================================
     })
