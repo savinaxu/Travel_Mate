@@ -329,7 +329,6 @@ section {
     height: 140px;
 }
 
-<<<<<<< HEAD
 .convert {
     display: flex;
     justify-content: center;
@@ -353,14 +352,6 @@ section {
 .active {
     color: #ffffff !important;
     background: #ff0066 !important;
-}
-
-=======
->>>>>>> master
-
-
-
-@media (min-width: 576px) {
 }
 
 /* // Medium devices (tablets, 768px and up) */
@@ -431,8 +422,4 @@ section {
     .result-header-content {
         font-size: 100px;
     }
-}
-/* 
-// Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
 }
