@@ -23,3 +23,5 @@ Below the div with the five listed areas are...
 What the user doesn't see is a myriad of coding action going down in the Javascript and CSS. The HTML is fairly clean and simple with multiple divs that are manipulated by the .JS file. The CSS gives a clean look and feels a bit simple on larger screens, but looks just right on a mobile platform as it's optimized for mobile use. 
 
 In the Javascript are functions galore that take in the user's input and run it through three seperate APIs, FourSquare, Pixabay, and the Open Weather API. Travel_Mate conducts two kinds of searches on the FourSquare API and a total of 11 API calls to FourSquare per search given that the FourSquare API requires one search to give us the top locations (we limit the results to five) and two searches per location,one for the picture and another for the description. 
+
+#Features
