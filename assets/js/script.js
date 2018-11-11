@@ -331,12 +331,17 @@ $(function () {
     $(".back").on("click", function () {
         $(".photoColumn1").empty()
         $(".photoColumn2").empty()
+        $(".celsius").removeClass("active")
+        $(".fahrenheit").addClass("active")
         landmarkArr = [];
         $("#location").val("")
         $("#result").hide("slow")
         $("#home").show("slow")
         a = 0
         b = 6
+        cClick = 0;
+        fClick = 1;
+
     })
     //-------------------
     // ***show more*** //
