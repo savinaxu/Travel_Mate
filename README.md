@@ -44,3 +44,7 @@ What the user doesn't see is a myriad of coding action going down in the code.
 
     ###CSS
     Yes, Bootstrap makes life easier, but this code is pretty badass even without it. The default layout is optimized for use on a mobile device. The @media calls that alter the site size enable use on tablets and desktops. Don't try to view this on a huge screen or else things will get funky!
+
+
+# Project Link
+https://savinaxu.github.io/Travel_Mate/
